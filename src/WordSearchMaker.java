@@ -10,6 +10,7 @@ public class WordSearchMaker {
     }
 
     WordSearchMaker(ArrayList<String> words){
+        this.words = new ArrayList<String>();
         this.words.addAll(words);
         this.board = new ArrayList<ArrayList<Character>>();
     }
@@ -22,7 +23,7 @@ public class WordSearchMaker {
     }
 
     public void makeWordSearch(ArrayList<String> words) {
-        makeWordSearchBoard();
+        wordSearchBoardSize();
     }
 
     public void makeWordSearch() {
@@ -36,7 +37,7 @@ public class WordSearchMaker {
     public void printBoard() {
         for (int i = 0; i < board.size(); i++){
             for (int j = 0; j < board.get(i).size(); j++){
-                System.out.println(board.get(i).get(j).charValue() + " ");
+                System.out.print(board.get(i).get(j).charValue() + " ");
             }
             System.out.println();
         }
@@ -46,11 +47,19 @@ public class WordSearchMaker {
 
     private void wordSearchBoardSize(){
         int lenOfLargestWord = 0;
+        this.board = new ArrayList<ArrayList<Character>>();
+
         for (int i = 0; i < words.size(); i++){
             if (lenOfLargestWord < words.get(i).length()){
                 lenOfLargestWord = words.get(i).length();
             }
         }
 
+        for (int i = 0; i < lenOfLargestWord; i++){
+            this.board.add(new ArrayList<Character>());
+            for (int j = 0; j < lenOfLargestWord; j++){
+                this.board.get(i).add(new Character('1'));
+            }
+        }
     }
 }
