@@ -21,28 +21,36 @@ public class WordSearchMaker {
         this.words.addAll(words);
     }
 
-    public void printBoard() {
-        for (int i = 0; i < board.size(); i++){
-            for (int j = 0; j < board.get(i).size(); j++){
-
-            }
-        }
-    }
-
     public void makeWordSearch(ArrayList<String> words) {
         makeWordSearchBoard();
     }
 
     public void makeWordSearch() {
-        makeWordSearchBoard();
+        wordSearchBoardSize();
 
 
 
 
     }
 
-    private void makeWordSearchBoard(){
+    public void printBoard() {
+        for (int i = 0; i < board.size(); i++){
+            for (int j = 0; j < board.get(i).size(); j++){
+                System.out.println(board.get(i).get(j).charValue() + " ");
+            }
+            System.out.println();
+        }
+    }
 
-        //add code here
+
+
+    private void wordSearchBoardSize(){
+        int lenOfLargestWord = 0;
+        for (int i = 0; i < words.size(); i++){
+            if (lenOfLargestWord < words.get(i).length()){
+                lenOfLargestWord = words.get(i).length();
+            }
+        }
+
     }
 }
