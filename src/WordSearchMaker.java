@@ -23,6 +23,18 @@ public class WordSearchMaker {
         this.words.addAll(words);
     }
 
+    private void randomInsertWord(String word){
+
+    }
+
+    void insertWords(){
+        String currentWord;
+        for (int i = 0; i < words.size(); i++){
+            currentWord = words.get(i);
+            randomInsertWord(currentWord);
+        }
+    }
+
     public void makeWordSearch(ArrayList<String> words) {
         wordSearchBoardSize(words);
 
@@ -34,7 +46,7 @@ public class WordSearchMaker {
     public void makeWordSearch() {
         wordSearchBoardSize();
 
-        //insertWords();
+        insertWords();
 
         insertRandomLetters();
     }
@@ -48,7 +60,8 @@ public class WordSearchMaker {
     private void insertRandomLetters(){
         for (int i = 0; i < board.size(); i++){
             for (int j = 0; j < board.get(i).size(); j++){
-                board.get(i).set(j, getRandomLetter());
+                if (board.get(i).get(j).charValue() == '1')
+                    board.get(i).set(j, getRandomLetter());
             }
         }
     }
