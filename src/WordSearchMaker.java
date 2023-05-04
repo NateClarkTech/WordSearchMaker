@@ -23,37 +23,88 @@ public class WordSearchMaker {
         this.words.addAll(words);
     }
 
-    private void randomInsertWord(String word){
+    boolean insertWord(String word, int direction){
+        switch (direction) {
+            case 0:
 
+            case 1:
+
+            case 2:
+
+            case 3:
+
+            case 4:
+
+            case 5:
+
+            case 6:
+
+            case 7:
+
+        }
+        return false;
     }
 
-    void insertWords(){
+    void findPlaceForWord() {
         String currentWord;
-        for (int i = 0; i < words.size(); i++){
-            currentWord = words.get(i);
-            randomInsertWord(currentWord);
+        boolean wordInserted = false;
+        Random rand = new Random();
+        int randInt;
+        int counter;
+        for (int i = 0; i < words.size(); i++) {
+            randInt = rand.nextInt(0, 9);
+            counter = 0;
+            while (wordInserted == false) {
+                currentWord = words.get(i);
+                wordInserted = insertWord(currentWord, randInt);
+                counter += 1;
+                randInt = (randInt + 1) % 8;
+                if (counter == 8){
+
+                }
+            }
         }
     }
 
-    void insertWords(ArrayList<String> words){
+    void findPlaceForWord(ArrayList<String> words) {
         String currentWord;
-        for (int i = 0; i < words.size(); i++){
+        boolean wordInserted = false;
+        Random rand = new Random();
+        int randInt;
+        int randX;
+        int randY;
+        int counter;
+        for (int i = 0; i < words.size(); i++) {
             currentWord = words.get(i);
-            randomInsertWord(currentWord);
+            randInt = rand.nextInt(0, 9);
+            randX = rand.nextInt(0, this.board.get(0).size());
+            randY = rand.nextInt(0, this.board.size());
+            counter = 0;
+            while (wordInserted == false) {
+                currentWord = words.get(i);
+                wordInserted = insertWord(currentWord, randInt);
+                counter += 1;
+                randInt = (randInt + 1) % 8;
+                if (counter == 8) {
+                    randX = rand.nextInt(0, this.board.get(0).size());
+                    randY = rand.nextInt(0, this.board.size());
+                }
+
+            }
         }
     }
 
     public void makeWordSearch() {
         wordSearchBoardSize();
 
-        insertWords();
+        findPlaceForWord();
 
         insertRandomLetters();
     }
     public void makeWordSearch(ArrayList<String> words) {
         wordSearchBoardSize(words);
 
-        insertWords(words);
+        findPlaceForWord(words);
 
         insertRandomLetters();
     }
