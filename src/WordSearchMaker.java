@@ -23,7 +23,7 @@ public class WordSearchMaker {
         this.words.addAll(words);
     }
 
-    boolean insertWord(String word, int direction){
+    boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
         switch (direction) {
             case 0:
 
@@ -50,13 +50,19 @@ public class WordSearchMaker {
         boolean wordInserted = false;
         Random rand = new Random();
         int randInt;
+        int randX;
+        int randY;
         int counter;
+        ArrayList<ArrayList<Character>> boardCopy = new ArrayList<ArrayList<Character>>();
         for (int i = 0; i < words.size(); i++) {
             randInt = rand.nextInt(0, 9);
+            randX = rand.nextInt(0, this.board.get(0).size());
+            randY = rand.nextInt(0, this.board.size());
             counter = 0;
             while (wordInserted == false) {
+                boardCopy.addAll(board);
                 currentWord = words.get(i);
-                wordInserted = insertWord(currentWord, randInt);
+                wordInserted = insertWord(currentWord, boardCopy, randInt, randX, randY);
                 counter += 1;
                 randInt = (randInt + 1) % 8;
                 if (counter == 8){
@@ -74,6 +80,7 @@ public class WordSearchMaker {
         int randX;
         int randY;
         int counter;
+        ArrayList<ArrayList<Character>> boardCopy = new ArrayList<ArrayList<Character>>();
         for (int i = 0; i < words.size(); i++) {
             currentWord = words.get(i);
             randInt = rand.nextInt(0, 9);
@@ -81,8 +88,8 @@ public class WordSearchMaker {
             randY = rand.nextInt(0, this.board.size());
             counter = 0;
             while (wordInserted == false) {
-                currentWord = words.get(i);
-                wordInserted = insertWord(currentWord, randInt);
+                boardCopy.addAll(board);
+                wordInserted = insertWord(currentWord, boardCopy, randInt, randX, randY);
                 counter += 1;
                 randInt = (randInt + 1) % 8;
                 if (counter == 8) {
