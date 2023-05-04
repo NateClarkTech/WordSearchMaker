@@ -26,21 +26,25 @@ public class WordSearchMaker {
     boolean insertWord(String word, int direction){
         switch (direction) {
             case 0:
-
+                randX += 1
             case 1:
-
+                randX += 1;
+                randY -= 1;
             case 2:
-
+                randY += 1;
             case 3:
-
+                randX -= 1;
+                randY += 1;
             case 4:
-
+                randX -= 1;
             case 5:
-
+                randX -= 1;
+                randY -= 1;
             case 6:
-
+                randY -+ 1;
             case 7:
-
+                randX += 1;
+                randY -= 1;
         }
         return false;
     }
