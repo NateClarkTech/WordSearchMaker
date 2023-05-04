@@ -35,18 +35,25 @@ public class WordSearchMaker {
         }
     }
 
-    public void makeWordSearch(ArrayList<String> words) {
-        wordSearchBoardSize(words);
-
-        //insertWords(words);
-
-        insertRandomLetters();
+    void insertWords(ArrayList<String> words){
+        String currentWord;
+        for (int i = 0; i < words.size(); i++){
+            currentWord = words.get(i);
+            randomInsertWord(currentWord);
+        }
     }
 
     public void makeWordSearch() {
         wordSearchBoardSize();
 
         insertWords();
+
+        insertRandomLetters();
+    }
+    public void makeWordSearch(ArrayList<String> words) {
+        wordSearchBoardSize(words);
+
+        insertWords(words);
 
         insertRandomLetters();
     }
