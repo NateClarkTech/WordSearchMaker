@@ -66,7 +66,8 @@ public class WordSearchMaker {
                 counter += 1;
                 randInt = (randInt + 1) % 8;
                 if (counter == 8){
-
+                    randX = rand.nextInt(0, this.board.get(0).size());
+                    randY = rand.nextInt(0, this.board.size());
                 }
             }
         }
