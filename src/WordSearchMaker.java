@@ -26,6 +26,9 @@ public class WordSearchMaker {
     boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
         switch (direction) {
             case 0:
+                board.get(0).set(1, new Character('C'));
+                board.get(0).set(2, new Character('A'));
+                board.get(0).set(3, new Character('T'));
 
             case 1:
 
@@ -42,7 +45,7 @@ public class WordSearchMaker {
             case 7:
 
         }
-        return false;
+        return true;
     }
 
     void findPlaceForWord() {
@@ -70,6 +73,7 @@ public class WordSearchMaker {
                     randY = rand.nextInt(0, this.board.size());
                 }
             }
+            board = new ArrayList<ArrayList<Character>>(boardCopy);
         }
     }
 
@@ -97,8 +101,8 @@ public class WordSearchMaker {
                     randX = rand.nextInt(0, this.board.get(0).size());
                     randY = rand.nextInt(0, this.board.size());
                 }
-
             }
+            board = new ArrayList<ArrayList<Character>>(boardCopy);
         }
     }
 
