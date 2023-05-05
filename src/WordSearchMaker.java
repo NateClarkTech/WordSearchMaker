@@ -26,9 +26,10 @@ public class WordSearchMaker {
     boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
         switch (direction) {
             case 0:
-                board.get(0).set(1, new Character('C'));
-                board.get(0).set(2, new Character('A'));
-                board.get(0).set(3, new Character('T'));
+                for (int i = 0; i < word.length(); i++)
+                    if (x < board.get(0).size() && y < board.size() && board.get(y).get(x).charValue() == '1'){
+                        board.get(y).set(x, Character.valueOf(word.charAt(i)));
+                    }
 
             case 1:
 
@@ -158,7 +159,7 @@ public class WordSearchMaker {
         for (int i = 0; i < lenOfLargestWord; i++){
             this.board.add(new ArrayList<Character>());
             for (int j = 0; j < lenOfLargestWord; j++){
-                this.board.get(i).add(new Character('1'));
+                this.board.get(i).add(Character.valueOf('1'));
             }
         }
     }
@@ -175,7 +176,7 @@ public class WordSearchMaker {
         for (int i = 0; i < lenOfLargestWord; i++){
             this.board.add(new ArrayList<Character>());
             for (int j = 0; j < lenOfLargestWord; j++){
-                this.board.get(i).add(new Character('1'));
+                this.board.get(i).add(Character.valueOf('1'));
             }
         }
     }
