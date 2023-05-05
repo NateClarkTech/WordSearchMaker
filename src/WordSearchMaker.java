@@ -1,3 +1,4 @@
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,31 +21,112 @@ public class WordSearchMaker {
         return words;
     }
     void setWords(ArrayList<String> words){
-        this.words.addAll(words);
+        this.words = new ArrayList<String>(words);
     }
 
     boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
+        System.out.println("X: " + x + " Y: " + y + " RANDINT: " + direction);
         switch (direction) {
-            case 0:
-                for (int i = 0; i < word.length(); i++)
-                    if (x < board.get(0).size() && y < board.size() && board.get(y).get(x).charValue() == '1'){
-                        board.get(y).set(x, Character.valueOf(word.charAt(i)));
+            case 0 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((x < board.get(0).size()) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        x++;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
                     }
-
-            case 1:
-
-            case 2:
-
-            case 3:
-
-            case 4:
-
-            case 5:
-
-            case 6:
-
-            case 7:
-
+                }
+                return true;
+            }
+            case 1 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if (((x < board.get(0).size()) && y < board.size()) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        x++;
+                        y++;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 2 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((y < board.size()) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        y++;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 3 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((x > -1 && y < board.size()) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        x--;
+                        y++;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 4 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((x > -1) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        x--;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 5 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((x > -1 && y > -1) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        x--;
+                        y--;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 6 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((y > -1) && ((board.get(y).get(x) == '1') || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        y--;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 7 -> {
+                for (int i = 0; i < word.length(); i++) {
+                    if ((x < board.get(0).size() && y > -1) && (board.get(y).get(x) == '1' || board.get(y).get(x).equals(word.charAt(i)))) {
+                        board.get(y).set(x, word.charAt(i));
+                        x++;
+                        y--;
+                    } else {
+                        System.out.println("FALSE");
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
         return true;
     }
@@ -52,7 +134,7 @@ public class WordSearchMaker {
     void findPlaceForWord() {
         String currentWord;
         boolean wordInserted = false;
-        Random rand = new Random();
+        Random rand = new Random(Clock.systemUTC().millis());
         int randInt;
         int randX;
         int randY;
@@ -63,17 +145,19 @@ public class WordSearchMaker {
             randX = rand.nextInt(0, this.board.get(0).size());
             randY = rand.nextInt(0, this.board.size());
             counter = 0;
-            while (wordInserted == false) {
-                boardCopy.addAll(board);
-                currentWord = words.get(i);
+            currentWord = words.get(i);
+            while (!wordInserted) {
+                boardCopy = new ArrayList<ArrayList<Character>>(this.board);
                 wordInserted = insertWord(currentWord, boardCopy, randInt, randX, randY);
                 counter += 1;
                 randInt = (randInt + 1) % 8;
                 if (counter == 8){
                     randX = rand.nextInt(0, this.board.get(0).size());
                     randY = rand.nextInt(0, this.board.size());
+                    counter = 0;
                 }
             }
+            wordInserted = false;
             board = new ArrayList<ArrayList<Character>>(boardCopy);
         }
     }
@@ -81,7 +165,7 @@ public class WordSearchMaker {
     void findPlaceForWord(ArrayList<String> words) {
         String currentWord;
         boolean wordInserted = false;
-        Random rand = new Random();
+        Random rand = new Random(Clock.systemUTC().millis());
         int randInt;
         int randX;
         int randY;
@@ -93,8 +177,8 @@ public class WordSearchMaker {
             randX = rand.nextInt(0, this.board.get(0).size());
             randY = rand.nextInt(0, this.board.size());
             counter = 0;
-            while (wordInserted == false) {
-                boardCopy.addAll(board);
+            while (!wordInserted) {
+                boardCopy = new ArrayList<ArrayList<Character>>(this.board);
                 wordInserted = insertWord(currentWord, boardCopy, randInt, randX, randY);
                 counter += 1;
                 randInt = (randInt + 1) % 8;
@@ -103,6 +187,7 @@ public class WordSearchMaker {
                     randY = rand.nextInt(0, this.board.size());
                 }
             }
+            wordInserted = false;
             board = new ArrayList<ArrayList<Character>>(boardCopy);
         }
     }
@@ -129,18 +214,18 @@ public class WordSearchMaker {
     }
 
     private void insertRandomLetters(){
-        for (int i = 0; i < board.size(); i++){
-            for (int j = 0; j < board.get(i).size(); j++){
-                if (board.get(i).get(j).charValue() == '1')
-                    board.get(i).set(j, getRandomLetter());
+        for (ArrayList<Character> characters : board) {
+            for (int j = 0; j < characters.size(); j++) {
+                if (characters.get(j) == '1')
+                    characters.set(j, getRandomLetter());
             }
         }
     }
 
     public void printBoard() {
-        for (int i = 0; i < board.size(); i++){
-            for (int j = 0; j < board.get(i).size(); j++){
-                System.out.print(board.get(i).get(j).charValue() + " ");
+        for (ArrayList<Character> characters : board) {
+            for (Character character : characters) {
+                System.out.print(character + " ");
             }
             System.out.println();
         }
@@ -150,16 +235,16 @@ public class WordSearchMaker {
         int lenOfLargestWord = 0;
         this.board = new ArrayList<ArrayList<Character>>();
 
-        for (int i = 0; i < words.size(); i++){
-            if (lenOfLargestWord < words.get(i).length()){
-                lenOfLargestWord = words.get(i).length();
+        for (String word : words) {
+            if (lenOfLargestWord < word.length()) {
+                lenOfLargestWord = word.length();
             }
         }
 
-        for (int i = 0; i < lenOfLargestWord; i++){
+        for (int i = 0; i < lenOfLargestWord * 2; i++){
             this.board.add(new ArrayList<Character>());
-            for (int j = 0; j < lenOfLargestWord; j++){
-                this.board.get(i).add(Character.valueOf('1'));
+            for (int j = 0; j < lenOfLargestWord * 2; j++){
+                this.board.get(i).add('1');
             }
         }
     }
@@ -167,16 +252,16 @@ public class WordSearchMaker {
         int lenOfLargestWord = 0;
         this.board = new ArrayList<ArrayList<Character>>();
 
-        for (int i = 0; i < words.size(); i++){
-            if (lenOfLargestWord < words.get(i).length()){
-                lenOfLargestWord = words.get(i).length();
+        for (String word : words) {
+            if (lenOfLargestWord < word.length()) {
+                lenOfLargestWord = word.length();
             }
         }
 
-        for (int i = 0; i < lenOfLargestWord; i++){
+        for (int i = 0; i < lenOfLargestWord * 2; i++){
             this.board.add(new ArrayList<Character>());
-            for (int j = 0; j < lenOfLargestWord; j++){
-                this.board.get(i).add(Character.valueOf('1'));
+            for (int j = 0; j < lenOfLargestWord * 2; j++){
+                this.board.get(i).add('1');
             }
         }
     }
