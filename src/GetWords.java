@@ -40,9 +40,15 @@ public class GetWords {
             System.out.print("Please enter a word: ");
             p1 = scr.nextLine();
             validWord = true;
+            for (String word : wordList){
+                if (p1.equalsIgnoreCase(word)){
+                    validWord = false;
+                    System.out.println("Invalid input, there can't be duplicate words.");
+                }
+            }
             if (p1.length() < 3){
                 validWord = false;
-                System.out.println("Invalid input, words have to be at least 3 letters and words can only have letters from A-Z.");
+                System.out.println("Invalid input, words have to be at least 3 letters long.");
             }
             for (int j = 0; j < p1.length(); j++) {
                 if (!Character.isLetter(p1.charAt(j))){
