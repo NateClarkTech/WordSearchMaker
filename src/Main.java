@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-
-import java.util.Arrays;
+import WordSearch.*;
 
 public class Main {
     public static void main(String[] args) {

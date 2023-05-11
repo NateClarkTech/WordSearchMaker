@@ -1,3 +1,5 @@
+package WordSearch;
+
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Random;
@@ -7,30 +9,30 @@ public class WordSearchMaker {
     private ArrayList<String> words;
     private ArrayList<ArrayList<Character>> board;
 
-    WordSearchMaker(){
+    public WordSearchMaker(){
         this.words = new ArrayList<String>();
         this.board = new ArrayList<ArrayList<Character>>();
     }
 
-    WordSearchMaker(ArrayList<String> words){
+    public WordSearchMaker(ArrayList<String> words){
         this.words = new ArrayList<String>();
         this.words.addAll(words);
         this.board = new ArrayList<ArrayList<Character>>();
     }
 
-    ArrayList<String> getWords(){
+    public ArrayList<String> getWords(){
         return words;
     }
 
-    ArrayList<ArrayList<Character>> getBoard(){
+    public ArrayList<ArrayList<Character>> getBoard(){
         return this.board;
     }
 
-    void setWords(ArrayList<String> words){
+    public void setWords(ArrayList<String> words){
         this.words = new ArrayList<String>(words);
     }
 
-    public ArrayList<ArrayList<Character>> deepCopy(ArrayList<ArrayList<Character>> board) {
+    private ArrayList<ArrayList<Character>> deepCopy(ArrayList<ArrayList<Character>> board) {
         ArrayList<ArrayList<Character>> copy = new ArrayList<ArrayList<Character>>();
         for (ArrayList<Character> list : board) {
             copy.add(new ArrayList<>(list));
@@ -38,14 +40,8 @@ public class WordSearchMaker {
         //printBoard(copy);
         return copy;
     }
-    /*
-    ArrayList<ArrayList<Character>> copy = new ArrayList<>();
-    for (ArrayList<Character> list : board) {
-        copy.add(new ArrayList<>(list));
-    }
-    */
 
-    boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
+    private boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
         System.out.println("X: " + x + " Y: " + y + " RANDINT: " + direction);
         switch (direction) {
             case 0 -> {
@@ -153,7 +149,7 @@ public class WordSearchMaker {
         return true;
     }
 
-    void findPlaceForWord() {
+    private void findPlaceForWord() {
         String currentWord;
         boolean wordInserted = false;
         Random rand = new Random(Clock.systemUTC().millis());
@@ -184,7 +180,7 @@ public class WordSearchMaker {
         }
     }
 
-    void findPlaceForWord(ArrayList<String> words) {
+    private void findPlaceForWord(ArrayList<String> words) {
         String currentWord;
         boolean wordInserted = false;
         Random rand = new Random(Clock.systemUTC().millis());
