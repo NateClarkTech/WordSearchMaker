@@ -42,7 +42,7 @@ public class WordSearchMaker {
     }
 
     private boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
-        System.out.println("X: " + x + " Y: " + y + " RANDINT: " + direction);
+        //System.out.println("X: " + x + " Y: " + y + " RANDINT: " + direction);
         switch (direction) {
             case 0 -> {
                 for (int i = 0; i < word.length(); i++) {
@@ -50,8 +50,7 @@ public class WordSearchMaker {
                         board.get(y).set(x, word.charAt(i));
                         x++;
                     } else {
-
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -64,7 +63,7 @@ public class WordSearchMaker {
                         x++;
                         y++;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -76,7 +75,7 @@ public class WordSearchMaker {
                         board.get(y).set(x, word.charAt(i));
                         y++;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -89,7 +88,7 @@ public class WordSearchMaker {
                         x--;
                         y++;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -101,7 +100,7 @@ public class WordSearchMaker {
                         board.get(y).set(x, word.charAt(i));
                         x--;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -114,7 +113,7 @@ public class WordSearchMaker {
                         x--;
                         y--;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -126,7 +125,7 @@ public class WordSearchMaker {
                         board.get(y).set(x, word.charAt(i));
                         y--;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
@@ -139,7 +138,7 @@ public class WordSearchMaker {
                         x++;
                         y--;
                     } else {
-                        System.out.println("FALSE");
+                        //System.out.println("FALSE");
                         return false;
                     }
                 }
