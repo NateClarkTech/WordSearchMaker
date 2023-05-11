@@ -27,16 +27,34 @@ public class GetWords {
             if (integerCheck(p1) && Integer.parseInt(p1) <= 20) {
                 intCheck = true;
             } else {
-                System.out.println("Invalid input.");
+                System.out.println("Invalid input, please type a number from 1-20.");
             }
         }
         n = Integer.parseInt(p1);
 
         //Takes in n words from the user
         System.out.println("Please enter " + n + " words.");
-        for(int i = 0; i < n; i++) {
+        int numWordsInputed = 0;
+        boolean validWord;
+        while (numWordsInputed != n){
+            System.out.print("Please enter a word: ");
             p1 = scr.nextLine();
-            wordList.add(p1.toUpperCase());
+            validWord = true;
+            if (p1.length() < 3){
+                validWord = false;
+                System.out.println("Invalid input, words have to be at least 3 letters and words can only have letters from A-Z.");
+            }
+            for (int j = 0; j < p1.length(); j++) {
+                if (!Character.isLetter(p1.charAt(j))){
+                    validWord = false;
+                    System.out.println("Invalid input, words have to be at least 3 letters and words can only have letters from A-Z.");
+                    break;
+                }
+            }
+            if (validWord == true) {
+                wordList.add(p1.toUpperCase());
+                numWordsInputed++;
+            }
         }
 
 

@@ -261,9 +261,6 @@ public class WordSearchMaker {
             System.out.println();
         }
     }
-   public ArrayList<ArrayList<Character>> getBoard() {
-        return this.board;
-   }
 
     private void wordSearchBoardSize(){
         int lenOfLargestWord = 0;

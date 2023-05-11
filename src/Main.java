@@ -10,10 +10,5 @@ public class Main {
         wordSearch.makeWordSearch();
         wordSearch.printBoard();
         new WordSearchDisplay(wordSearch.getBoard());
-        System.out.println();
-        wordSearch.makeWordSearch(words);
-        wordSearch.printBoard();
-        new WordSearchDisplay(wordSearch.getBoard());
-
     }
 }
