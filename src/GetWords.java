@@ -6,15 +6,10 @@ public class GetWords {
     public static boolean integerCheck(String s) {
         try {
             Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return false;
         }
-        if (Integer.parseInt(s) <= 0) {
-            return false;
-        }
-        return true;
+        return Integer.parseInt(s) > 0;
     }
 
     public static ArrayList<String> setWords(){
@@ -26,10 +21,10 @@ public class GetWords {
 
         String p1 = "";
         //User sets the number of words. Exits when user inputs a number from 0-20.
-        while(intCheck == false ) {
+        while(!intCheck) {
             System.out.print("How many words would you like in the word search? (maximum of 20): ");
             p1 = scr.nextLine();
-            if (integerCheck(p1) == true && Integer.parseInt(p1) <= 20) {
+            if (integerCheck(p1) && Integer.parseInt(p1) <= 20) {
                 intCheck = true;
             } else {
                 System.out.println("Invalid input.");

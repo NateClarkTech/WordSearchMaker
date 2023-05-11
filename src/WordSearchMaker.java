@@ -2,6 +2,7 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class WordSearchMaker {
     private ArrayList<String> words;
     private ArrayList<ArrayList<Character>> board;
@@ -24,6 +25,21 @@ public class WordSearchMaker {
         this.words = new ArrayList<String>(words);
     }
 
+    public ArrayList<ArrayList<Character>> deepCopy(ArrayList<ArrayList<Character>> board) {
+        ArrayList<ArrayList<Character>> copy = new ArrayList<ArrayList<Character>>();
+        for (ArrayList<Character> list : board) {
+            copy.add(new ArrayList<>(list));
+        }
+        //printBoard(copy);
+        return copy;
+    }
+    /*
+    ArrayList<ArrayList<Character>> copy = new ArrayList<>();
+    for (ArrayList<Character> list : board) {
+        copy.add(new ArrayList<>(list));
+    }
+    */
+
     boolean insertWord(String word, ArrayList<ArrayList<Character>> board, int direction, int x, int y){
         System.out.println("X: " + x + " Y: " + y + " RANDINT: " + direction);
         switch (direction) {
@@ -33,6 +49,7 @@ public class WordSearchMaker {
                         board.get(y).set(x, word.charAt(i));
                         x++;
                     } else {
+
                         System.out.println("FALSE");
                         return false;
                     }
@@ -147,7 +164,7 @@ public class WordSearchMaker {
             counter = 0;
             currentWord = words.get(i);
             while (!wordInserted) {
-                boardCopy = new ArrayList<ArrayList<Character>>(this.board);
+                boardCopy = deepCopy(this.board);
                 wordInserted = insertWord(currentWord, boardCopy, randInt, randX, randY);
                 counter += 1;
                 randInt = (randInt + 1) % 8;
@@ -158,7 +175,7 @@ public class WordSearchMaker {
                 }
             }
             wordInserted = false;
-            board = new ArrayList<ArrayList<Character>>(boardCopy);
+            board = deepCopy(boardCopy);
         }
     }
 
@@ -178,7 +195,7 @@ public class WordSearchMaker {
             randY = rand.nextInt(0, this.board.size());
             counter = 0;
             while (!wordInserted) {
-                boardCopy = new ArrayList<ArrayList<Character>>(this.board);
+                boardCopy = deepCopy(this.board);
                 wordInserted = insertWord(currentWord, boardCopy, randInt, randX, randY);
                 counter += 1;
                 randInt = (randInt + 1) % 8;
@@ -188,7 +205,7 @@ public class WordSearchMaker {
                 }
             }
             wordInserted = false;
-            board = new ArrayList<ArrayList<Character>>(boardCopy);
+            board = deepCopy(boardCopy);
         }
     }
 
@@ -230,6 +247,18 @@ public class WordSearchMaker {
             System.out.println();
         }
     }
+
+    public void printBoard(ArrayList<ArrayList<Character>> board) {
+        for (ArrayList<Character> characters : board) {
+            for (Character character : characters) {
+                System.out.print(character + " ");
+            }
+            System.out.println();
+        }
+    }
+   public ArrayList<ArrayList<Character>> getBoard() {
+        return this.board;
+   }
 
     private void wordSearchBoardSize(){
         int lenOfLargestWord = 0;
