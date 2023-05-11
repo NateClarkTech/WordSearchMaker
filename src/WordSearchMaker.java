@@ -21,6 +21,11 @@ public class WordSearchMaker {
     ArrayList<String> getWords(){
         return words;
     }
+
+    ArrayList<ArrayList<Character>> getBoard(){
+        return this.board;
+    }
+
     void setWords(ArrayList<String> words){
         this.words = new ArrayList<String>(words);
     }
