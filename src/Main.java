@@ -8,6 +8,11 @@ public class Main {
         WordSearchMaker wordSearch = new WordSearchMaker(words);
         wordSearch.makeWordSearch();
         wordSearch.printBoard();
-        new WordSearchDisplay(wordSearch.getBoard());
+        //new WordSearchDisplay(wordSearch.getBoard());
+        System.out.println();
+        wordSearch.makeWordSearch(words);
+        wordSearch.printBoard();
+
+        new WordSearchDisplay(wordSearch.getBoard(), words);
     }
 }
