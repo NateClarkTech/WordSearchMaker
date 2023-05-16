@@ -5,6 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**************************************************************
+ * @author Nathaniel Clark, Jhonder, Megan                    *
+ *  @version 1.0                                              *
+ *  @since May 2023                                           *
+ *  WordSearchDisplay - Gives a GUI display of the word search*
+ **************************************************************/
+
 public class WordSearchDisplay extends JFrame{
     private ArrayList<ArrayList<Character>> grid;
     private JPanel panel;
@@ -12,6 +19,9 @@ public class WordSearchDisplay extends JFrame{
     private ArrayList<String> correctWords;
     private ArrayList<JButton> clickedButtons;
 
+    /*************************************************************
+     * Takes a word search board and makes a GUI display         *
+     *************************************************************/
     public WordSearchDisplay(ArrayList<ArrayList<Character>> grid, ArrayList<String> correctWords) {
         super("Word Search Display");
 
@@ -55,7 +65,9 @@ public class WordSearchDisplay extends JFrame{
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
+    /*************************************************************
+     * Checks to see if a highlighted word is in the word search *
+     *************************************************************/
     public void checkWord() {
         StringBuilder sb = new StringBuilder();
         for (JButton button : clickedButtons) {
