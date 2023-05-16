@@ -3,9 +3,19 @@ package WordSearch;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GetWords {
+/**********************************************
+ * @author Nathaniel Clark, Jhonder, Megan    *
+ * @version 1.0                               *
+ * @since May 2023                            *
+ * GetWords - gets user input for words       *
+ **********************************************/
 
-    public static boolean integerCheck(String s) {
+public class GetWords {
+    /**************************************************
+     * @param s A user inputed string                 *
+     * @return true if string is a number, else false *
+     *************************************************/
+    private static boolean integerCheck(String s) {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException | NullPointerException e) {
@@ -14,8 +24,14 @@ public class GetWords {
         return Integer.parseInt(s) > 0;
     }
 
+    /******************************************************
+     * Gets user input for words they want in word search *
+     * @return ArrayList of words                         *
+     ******************************************************/
     public static ArrayList<String> setWords(){
+        //ArrayList to store words
         ArrayList<String> wordList = new ArrayList<>();
+        //number of words that will be in list
         int n;
         boolean intCheck = false;
         //create a new scanner
@@ -38,20 +54,24 @@ public class GetWords {
         System.out.println("Please enter " + n + " words.");
         int numWordsInputed = 0;
         boolean validWord;
+        //while n words not entered
         while (numWordsInputed != n){
             System.out.print("Please enter a word: ");
-            p1 = scr.nextLine();
+            p1 = scr.nextLine(); //get a string
             validWord = true;
+            //check if word is valid
             for (String word : wordList){
                 if (p1.equalsIgnoreCase(word)){
                     validWord = false;
                     System.out.println("Invalid input, there can't be duplicate words.");
                 }
             }
+            //prevents words with only 1 and 2 letters
             if (p1.length() < 3){
                 validWord = false;
                 System.out.println("Invalid input, words have to be at least 3 letters long.");
             }
+            //make sure word is not already in the word search
             for (int j = 0; j < p1.length(); j++) {
                 if (!Character.isLetter(p1.charAt(j))){
                     validWord = false;
@@ -59,15 +79,13 @@ public class GetWords {
                     break;
                 }
             }
+            //if word passed all the logic check then it is valid and add it to the list
             if (validWord == true) {
                 wordList.add(p1.toUpperCase());
                 numWordsInputed++;
             }
         }
-
-
         scr.close();
-
         return wordList;
     }
 
